@@ -25,3 +25,10 @@ class User(AbstractBaseUser):
     def __str__(self) -> str:
         return "'{}'".format(self.username, self.date_joined)
 
+
+
+class Post(models.Model):
+    content = models.TextField()
+    date_posted = models.DateField(default=date.today)
+    is_public= models.BooleanField(default=True)
+    owner = models.ForeignKey(User, on_delete=models.CASCADE,  related_name='MyPosts')
