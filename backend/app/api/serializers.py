@@ -2,13 +2,23 @@ from rest_framework import serializers
 
 from .models import User, Post
 
-class PostSerializers(serializers.ModelSerializer):
+class PostSerializer(serializers.ModelSerializer):
     class Meta:
         model = Post
-        fields = ['content', 'date_posted', 'is_public', 'owner']
+        fields = ['content', 'owner']
         depth = 1
-
-
+    
+    def validate_content(self, value:str):
+        if len(value) < 5:
+            raise serializers.ValidationError('Content must be at least 5 characters')
+        return value
+    
+    def save(self, user:User):
+        content = self.validated_data['content']
+        if not user.is_active:
+            raise serializers.ValidationError("You can't create a post")
+        post = Post(owner=user, content=content)
+        post.save()
 
 
 class SignUpSerializers(serializers.Serializer):
