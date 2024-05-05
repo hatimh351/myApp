@@ -1,5 +1,5 @@
-import LoginSection from "@/app/ui/SignUpSection"
-import Link from "next/link"
+import SignUpSection from "@/app/ui/SignUpSection"
+
 
 
 export default function SignUpPage()
@@ -10,7 +10,7 @@ export default function SignUpPage()
 
                 <div className="rounded w-[70%] h-[100%]  flex flex-col  items-center justify-center">
                     <h1 className="mt-12 font-bold font-sans text-5xl mb-10">Join us today! </h1>
-                    <LoginSection/>
+                    <SignUpSection/>
                 </div>
                 <div className="bg-[#663399] w-full"></div>
 

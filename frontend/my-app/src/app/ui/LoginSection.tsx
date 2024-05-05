@@ -4,6 +4,14 @@ const Login = async (formData: FormData) =>
 {
     'use server';
     console.log(formData.get('username'), formData.get('password'))
+    const res = await fetch('http://127.0.0.1:8000/sign-up/', {
+        body: JSON.stringify({username: formData.get('username'), password: formData.get('password')}),
+        method : 'POST',
+
+    })
+    console.log("here")
+    
+    console.log(res)
 }
 
 const LoginSection = () =>

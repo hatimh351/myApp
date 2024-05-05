@@ -3,7 +3,17 @@ import Button from "./Button";
 const SignUp = async (formData: FormData) =>
 {
     'use server';
-    console.log(formData.get('username'), formData.get('password'), formData.get('password-confirmation'))
+    const res = await fetch('http://127.0.0.1:8000/api/sign-up/', {
+        method : 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
+        body: JSON.stringify({'username': formData.get('username'), 'password': formData.get('password')}),
+
+    })
+    
+    console.log(await res.json())
 }
 
 const SignUpSection = () =>
