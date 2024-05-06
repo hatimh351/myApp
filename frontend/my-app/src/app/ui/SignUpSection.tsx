@@ -1,26 +1,32 @@
+'use client'
 import Button from "./Button";
+import SignUp from '@/app/lib/SignUp'
+import { useFormState } from "react-dom";
 
-const SignUp = async (formData: FormData) =>
+type FormState = 
 {
-    'use server';
-    const res = await fetch('http://127.0.0.1:8000/api/sign-up/', {
-        method : 'POST',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-          },
-        body: JSON.stringify({'username': formData.get('username'), 'password': formData.get('password')}),
-
-    })
-    
-    console.log(await res.json())
+    username: string;
+    password: string;
+    password1: string;
+    ThreIsErrors: boolean;
+    errors: string[];
 }
 
 const SignUpSection = () =>
 {
+    const [formState, formAction ] = useFormState(SignUp, 
+        {
+            username: '',
+            password: '',
+            password1: '',
+            ThreIsErrors: false,
+            errors: [],
+        })
     return (
-        <form className="flex flex-col h-[20em] justify-evenly items-center " action={SignUp}>
-       
+        <form className="flex flex-col h-[20em] justify-evenly items-center " action={formAction}>
+        
+            {formState.ThreIsErrors ? <span> {formState.errors} </span> : <></>}
+            
             <input name='username' placeholder="Username" className=" pl-6 bg-gray-100 h-10 border-none outline-none focus:outline-[#663399] rounded-full" />
             <input name='password' placeholder="Password" className="pl-6 bg-gray-100 h-10 border-none outline-none focus:outline-[#663399] rounded-full" type="password"/>
             <input name='password-confirmation' placeholder="Password confirmation" className="pl-6 bg-gray-100 h-10 border-none outline-none focus:outline-[#663399] rounded-full" type="password"/>
