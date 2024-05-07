@@ -12,8 +12,6 @@ export default function SignUpPage()
                     <h1 className="mt-12 font-bold font-sans text-5xl mb-10">Join us today! </h1>
                     <SignUpSection/>
                 </div>
-                <div className="bg-[#663399] w-full"></div>
-
             </div>
         </div>
     )
