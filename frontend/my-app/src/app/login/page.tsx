@@ -5,6 +5,7 @@ import Link from "next/link"
 
 export default function LoginPage()
 {
+
     return (
         <div className="flex w-[90%] items-center justify-center  ">
             <div className="rounded-md w-[80%] h-[60%]  flex flex-col  items-center justify-center shadow-2xl  overflow-hidden">
