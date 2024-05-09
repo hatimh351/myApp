@@ -16,7 +16,7 @@ const LoginSection = () =>
     
     return (
         <>
-            {formState.err.length != 0 ? <span className="text-red-500 text-[1em]"> {formState.err} </span> : <></>}
+            {  formState?.err.length != 0 ? <span className="text-red-500 text-[1em]"> {formState.err} </span> : <></>}
             <form className="flex flex-col justify-center items-center" action={formAction}>
 
             <div className="flex flex-col h-4/5 justify-between mt-10 mb-10">

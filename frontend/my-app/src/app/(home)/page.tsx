@@ -1,6 +1,6 @@
 'use client'
 
-import {WithAuth} from "@/app/_lib/withAuth"
+import {withAuth} from "@/app/_lib/withAuth"
 
 
 const  Home = ()=> {
@@ -12,4 +12,4 @@ const  Home = ()=> {
 }
 
 
-export default WithAuth(Home);
+export default withAuth(Home);

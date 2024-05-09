@@ -1,4 +1,4 @@
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view , permission_classes
 from rest_framework.response import Response
 from .serializers import SignUpSerializers, PostSerializer
 from datetime import date
@@ -6,8 +6,13 @@ from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework_simplejwt.authentication import JWTTokenUserAuthentication
 from .models import User
+from rest_framework.permissions import IsAuthenticated
 
-
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def verify(request):
+    return Response({'status': 'ok'}, status=status.HTTP_200_OK)
+ 
 @api_view(['POST'])
 def signUp(request):
     request.data['created'] = date.today()
