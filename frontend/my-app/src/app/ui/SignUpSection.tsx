@@ -1,6 +1,6 @@
 'use client'
 import Button from "./Button";
-import SignUp from '@/app/lib/SignUp'
+import SignUp from '@/app/_lib/SignUp'
 import { useFormState } from "react-dom";
 
 

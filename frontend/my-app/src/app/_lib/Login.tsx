@@ -1,6 +1,8 @@
 'use server'
 import { revalidatePath } from "next/cache";
 import {redirect} from "next/navigation";
+import { cookies } from "next/headers";
+import { CgOculus } from "react-icons/cg";
 
 type FormState = 
 {
@@ -30,7 +32,7 @@ const Login = async (prevState: FormState, formData:FormData):Promise<FormState>
     }
 
 
-    const res = await fetch('http://127.0.0.1:8000/api/token/', {
+    const req = await fetch('http://127.0.0.1:8000/api/token/', {
         body: JSON.stringify({username: formData.get('username'), password: formData.get('password')}),
         method : 'POST',
         headers: {
@@ -39,8 +41,16 @@ const Login = async (prevState: FormState, formData:FormData):Promise<FormState>
           },
     })
 
-    console.log(await res.json())
+    const respon =  await req.json()
+    if (req.status != 200)
+    {
+        prevState.err = respon?.detail;
+        return prevState; 
+    }
 
+    cookies().set('refresh', respon?.refresh);
+    cookies().set('access', respon?.access);
+    
     return prevState
 }
 
