@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "@/app/globals.css";
 import NavBar from '@/app/ui/NavBar'
+import { CookiesProvider } from 'next-client-cookies/server';
+
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,7 +22,9 @@ export default function RootLayout({
       <body className={`${inter.className} flex bg-white justify-between`}>
         
         <NavBar/>
-        {children}
+        <CookiesProvider>
+		{children}
+	</CookiesProvider>
       </body>
     </html>
   );

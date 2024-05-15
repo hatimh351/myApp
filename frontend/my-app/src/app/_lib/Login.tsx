@@ -41,17 +41,17 @@ const Login = async (prevState: FormState, formData:FormData):Promise<FormState>
     })
     
     const respon =  await req.json()
+    
     if (req.status != 200)
     {
         prevState.err = respon?.detail;
         return prevState; 
     }
     
-    console.log(respon?.access);
     cookies().set('refresh', respon?.refresh);
     cookies().set('access', respon?.access);
-    
-    return prevState
+
+    redirect('/'); 
 }
 
 export default Login;
