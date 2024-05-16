@@ -8,7 +8,8 @@ export  const withAuth = (WrappedComponent: any) =>
 {
     return  function WithAuth(props:any)
     {
-	    const [isLogin, setLogin] = useState(false);
+	    const [isLogin, setLogin] = useState(true);
+	    const [isLoading, setLoading] = useState(true);
             const cookies = useCookies();
             const refresh = cookies.get('refresh');
             const access = cookies.get('access');
@@ -23,12 +24,16 @@ export  const withAuth = (WrappedComponent: any) =>
         		},
     	   	})
     		if (res.status != 200)
-			setLogin(true)	    
+				setLogin(false)
+			setLoading(false);
 	}
-	    if (isLogin)
-		redirect('/login/')
-	    useEffect(()=> { checkAuth()}, [])    
+	useEffect(()=> { checkAuth()}, [])    
+	
+	if (isLoading)
+		return (<h1> Loading </h1>);
 
-        return <WrappedComponent {...props} />;
+	if (!isLogin)
+		redirect('/login/')
+	return <WrappedComponent {...props} />;
     }
 }
