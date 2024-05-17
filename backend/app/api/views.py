@@ -8,6 +8,13 @@ from rest_framework_simplejwt.authentication import JWTTokenUserAuthentication
 from .models import User
 from rest_framework.permissions import IsAuthenticated
 
+
+
+def _(errors):
+    for error in errors:
+        return errors[error][0]
+    return ''
+
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def verify(request):
@@ -22,7 +29,7 @@ def signUp(request):
     if serializer.is_valid():
         serializer.save()
         return Response({'Details' : {'Success': 'your account is created'}})
-    return Response({'Details' :{'Fail' : serializer.errors}}, status=status.HTTP_400_BAD_REQUEST)
+    return Response({'Details' : {'Fail' : _(serializer.errors)}}, status=status.HTTP_400_BAD_REQUEST)
 
 
 class Post(APIView):
@@ -40,7 +47,7 @@ class Post(APIView):
         postSerializer = PostSerializer(data=post)
         try:
             if not postSerializer.is_valid():
-                return Response({'Details' :{'Fail' : postSerializer.errors}}, status=status.HTTP_400_BAD_REQUEST)
+                return Response({'Details' : {'Fail' : _(postSerializer.errors) }}, status=status.HTTP_400_BAD_REQUEST)
             postSerializer.save(user)
             return Response({'Details': {'Success': 'Your post was created'}}, status=status.HTTP_201_CREATED)
         

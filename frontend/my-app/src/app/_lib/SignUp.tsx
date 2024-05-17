@@ -63,7 +63,6 @@ const SignUp = async (prevState: FormState, formData:FormData):Promise<FormState
         return prevState;  
     }
 
-    console.log({'username': formData.get('username'), 'password': formData.get('password')})
     const res = await fetch('http://127.0.0.1:8000/api/sign-up/', {
         method : 'POST',
         headers: {
@@ -74,9 +73,12 @@ const SignUp = async (prevState: FormState, formData:FormData):Promise<FormState
     
     })
     const result = await res.json()
-
-    console.log(result?.Details)
-    return prevState
+    if (res?.status != 200)
+    {
+    	prevState.err = result?.Details?.Fail;
+        return prevState
+    };
+    redirect('/login');
 }
 
 export default SignUp;
