@@ -1,13 +1,13 @@
 'use client'
 
 import {withAuth} from "@/app/_lib/withAuth"
-
+import CreatePost from "./CreatePost";
 
 const  Home = ()=> {
   return (
-    <main>
-      <h1>Home</h1>
-    </main>
+    <>
+      <CreatePost> </CreatePost>
+    </>
   );
 }
 

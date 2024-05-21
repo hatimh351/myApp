@@ -22,9 +22,9 @@ export default function RootLayout({
       <body className={`${inter.className} flex bg-white justify-between`}>
         
         <NavBar/>
-        <CookiesProvider>
+    <CookiesProvider>
 		{children}
-	</CookiesProvider>
+	  </CookiesProvider>
       </body>
     </html>
   );

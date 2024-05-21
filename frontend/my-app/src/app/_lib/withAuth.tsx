@@ -30,7 +30,7 @@ export  const withAuth = (WrappedComponent: any) =>
 	useEffect(()=> { checkAuth()}, [])    
 	
 	if (isLoading)
-		return (<h1> Loading </h1>);
+		return (<div className="flex w-[90%] items-center justify-center  "> loading </div>);
 
 	if (!isLogin)
 		redirect('/login/')
